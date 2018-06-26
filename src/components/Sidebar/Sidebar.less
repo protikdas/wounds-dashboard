@@ -1,0 +1,94 @@
+@import "../../less/exports.less";
+
+.sidebar-container {
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    @media screen and (max-width: @desktop) {
+        display: none;
+    }
+}
+
+.sidebar-circle {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: @skyBlue;
+    position: absolute;
+    // box-shadow: 0px 0px 15px @teal;
+    box-sizing: border-box;
+    top: -100px;
+    left: -100px;
+    z-index: 1;
+}
+
+.sidebar-profile-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.sidebar-profile {
+    width: 90%;
+    margin: 65px auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-picture {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    padding: 10px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 15px @teal;
+    box-sizing: border-box;
+    background: white;
+    margin-bottom: 10px;
+}
+
+.profile-position {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.sidebar-tab {
+    margin: 20px auto;
+    width: 100%;
+    height: 50px;
+}
+
+.sidebar-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    cursor: pointer;
+    &:hover {
+        & > .sky-blue-underline {
+            width: 60px;
+            border: 1px solid @skyBlue;
+            opacity: 1;
+        }
+    }
+}
+
+.sky-blue-underline {
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+    width: 0px;
+    border: 1px solid @skyBlue;
+    opacity: 0;
+}
+
+
+.brand-container {
+    padding:40px;
+    position: absolute;
+    bottom: 0px;
+}
