@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./Dashboard.less";
 
 /* <----- COMPONENTS ------> */
@@ -23,11 +23,17 @@ class Dashboard extends Component {
         <Sidebar />
         <div className="view-container">
           <Switch>
+            <Route
+              path="/dashboard"
+              exact
+              component={() => <Redirect to="/dashboard/patients" />}
+            />
             <Route path="/dashboard/patients" component={PatientList} />
             <Route
               path="/dashboard/patient/:id"
               component={props => <PatientDetails match={props.match} />}
             />
+            <Route component={() => <Redirect to="/dashboard/patients" />} />
           </Switch>
         </div>
       </div>

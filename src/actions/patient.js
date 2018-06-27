@@ -1,4 +1,4 @@
-import { GET_PATIENTS, GET_WOUNDS } from "./types";
+import { GET_PATIENTS, GET_WOUNDS, SORT_PATIENTS_BY_LAST_NAME } from "./types";
 import api from "../api";
 
 export const getPatients = () => dispatch => {
@@ -17,4 +17,10 @@ export const getWounds = patientID => dispatch => {
       payload: wounds
     })
   );
+};
+
+export const sortPatientsByLastName = () => dispatch => {
+  dispatch({
+    type: SORT_PATIENTS_BY_LAST_NAME
+  });
 };

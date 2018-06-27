@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import moment from "moment";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import "./PatientDetails.less";
 
 /* <----- ASSETS ------> */
 import check from "../../assets/check.svg";
 import cross from "../../assets/cross.svg";
+import magnify from "../../assets/magnify.svg";
 
 /* <----- HIGHER ORDER COMPONENTS ------> */
 import View from "../../HOC/View/View";
@@ -118,6 +120,8 @@ export default connect(
   mapStateToProps,
   { getWounds, selectWound, patchWound }
 )(View("patient")(PatientDetails));
+
+/* <----- FUNCTIONAL COMPONENTS ------> */
 
 const PatientContainer = ({ ...props }) => {
   const { className, children, ...rest } = props;
@@ -317,8 +321,11 @@ const WoundImage = ({ ...props }) => {
     );
   } else {
     return (
-      <div className={className || "wound-magnified-image-container"}>
-        <h3>Please Select</h3>
+      <div className={className || "wound-image-help"}>
+        <h3 className="not-bold">Please click on a</h3>
+        <img className="magnify help" src={magnify} alt="magnify" />
+        <h3 className="not-bold">icon to view</h3>
+        <h3 className="not-bold">wound image.</h3>
       </div>
     );
   }
@@ -329,7 +336,7 @@ const LastUpdated = ({ ...props }) => {
   return (
     <div className="last-updated">
       <p>
-        <em>Last Updated:</em>&nbsp;
+        Last Updated:&nbsp;
         {updatedAt}
       </p>
     </div>

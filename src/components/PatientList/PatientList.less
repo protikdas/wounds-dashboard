@@ -9,9 +9,32 @@
     height: 100px;
     background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0.75) 80%, rgba(255, 255, 255, 0));
     position: relative;
-    padding-left: 20px;
+    padding: 0 20px;
     z-index: 1;
     pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sort-patients {
+    position: absolute;
+    z-index: 2;
+    right: 62px;
+    top: 41px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+        & > .sky-blue-underline {
+            width: 60px;
+            opacity: 1;
+        }
+    }
+
 }
 
 .patient-list-container {

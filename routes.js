@@ -38,7 +38,6 @@ router.get("/patients/:id/wounds", (req, res) => {
 
 router.patch("/wounds/:id", (req, res) => {
   const woundID = req.params.id;
-  req.body.id = req.body.id.toString();
   let body = {
     data: {
       type: req.body.type,
@@ -46,15 +45,10 @@ router.patch("/wounds/:id", (req, res) => {
       attributes: { resolved: req.body.attributes.resolved }
     }
   };
-  body = `${JSON.stringify(body)}`;
-  console.log(body);
-  var options = {
+  body = JSON.stringify(body);
+  const options = {
     method: "PATCH",
-    url: "http://0.0.0.0:3000/wounds/1",
-    headers: {
-      "Postman-Token": "122cff68-a047-4803-b6d2-442881da7368",
-      "Cache-Control": "no-cache"
-    },
+    url: `http://0.0.0.0:3000/wounds/${woundID}`,
     body
   };
 
