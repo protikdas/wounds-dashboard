@@ -65,6 +65,32 @@
     background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 0.75) 80%, rgba(255, 255, 255, 0));
 }
 
+.filter {
+    margin-right: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    margin: 0 auto;
+    opacity: 0.5;
+    transition: all 0.5s ease-in-out;
+    & > .sky-blue-underline {
+        margin: 2px 0;
+    }
+    &:hover {
+        & > .sky-blue-underline {
+            width: 60px;
+            border: 1px solid @skyBlue;
+            opacity: 1;
+        }
+    }
+    &-selected {
+        opacity: 1;
+    }
+}
+
+
 .wound-container {
     height: 100px;
     margin-bottom: 30px;
@@ -204,11 +230,12 @@
 }
 
 .wound-meta-data-container {
+    width: 100%;
     position: absolute;
     text-align: right;
     color: white;
-    bottom: 10px;
-    right: 10px;
+    bottom: 8px;
+    right: 8px;
     font-size: 11px; 
     opacity: 0.3;
     transition: opacity 0.5s;
@@ -220,6 +247,14 @@
             text-shadow: 0 0 5px black;
         }
     }
+}
+
+.wound-meta-data {
+    width: 96%;
+    position: relative;
+    left: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 

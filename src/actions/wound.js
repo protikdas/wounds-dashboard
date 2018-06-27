@@ -21,6 +21,7 @@ export const patchWound = (type, wound) => dispatch => {
           });
         });
       }
+      break;
     default:
       dispatch({
         type: PATCH_WOUND,

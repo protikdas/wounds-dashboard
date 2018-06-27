@@ -34,11 +34,43 @@ const mapStateToProps = (state, props) => {
 };
 
 class PatientDetails extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      filter: "all"
+    };
+  }
+
   componentWillMount() {
     const { match } = this.props;
     const patientID = match.params.id;
     this.props.getWounds(patientID);
   }
+
+  changeFilter = option => {
+    this.setState({
+      filter: option
+    });
+  };
+
+  filterWounds = wounds => {
+    const { filter } = this.state;
+    if (wounds) {
+      switch (filter) {
+        case "all":
+          return wounds.slice();
+        case "resolved":
+          return wounds.filter(wound => wound.attributes.resolved);
+          break;
+        case "unresolved":
+          return wounds.filter(wound => !wound.attributes.resolved);
+          break;
+        default:
+          return wounds.slice();
+      }
+    }
+  };
 
   render() {
     const {
@@ -48,26 +80,20 @@ class PatientDetails extends Component {
       selectWound,
       patchWound
     } = this.props;
-    let woundImageUrl = "",
-      createdAt = "",
-      updatedAt = "";
-    if (selectedWound && wounds) {
-      let woundIndex = wounds.findIndex(w => w.id === selectedWound);
-      if (woundIndex !== -1) {
-        console.log(wounds[woundIndex].attributes.updatedAt);
-        woundImageUrl = wounds[woundIndex].attributes.imageUrl;
-        createdAt = wounds[woundIndex].attributes.createdAt;
-        updatedAt = wounds[woundIndex].attributes.updatedAt;
-      }
-    }
+
+    let viewWounds = this.filterWounds(wounds);
+
     return (
       <PatientContainer>
         <Details patient={patient} />
         <WoundsContainer>
-          <WoundsFilter />
+          <WoundsFilter
+            filter={this.state.filter}
+            changeFilter={this.changeFilter}
+          />
           <WoundList>
             {wounds &&
-              wounds.map((wound, index) => {
+              viewWounds.map((wound, index) => {
                 return (
                   <Wound
                     key={index}
@@ -79,11 +105,7 @@ class PatientDetails extends Component {
                 );
               })}
           </WoundList>
-          <WoundImage
-            imageUrl={woundImageUrl}
-            createdAt={createdAt}
-            updatedAt={updatedAt}
-          />
+          <WoundImage wounds={wounds} selectedWound={selectedWound} />
         </WoundsContainer>
       </PatientContainer>
     );
@@ -148,11 +170,39 @@ const WoundList = ({ ...props }) => {
 };
 
 const WoundsFilter = ({ ...props }) => {
-  const { className, children, ...rest } = props;
+  const { className, children, filter, changeFilter, ...rest } = props;
   return (
     <div className={className || "wounds-filter-container"}>
-      <p>Show Unresolved</p>&nbsp;&nbsp;&nbsp;
-      <p>Show Resolved</p>
+      <div
+        className={`filter ${filter === "all" ? "filter-selected" : {}}`}
+        onClick={() => changeFilter("all")}
+      >
+        All Wounds
+        <div
+          className="sky-blue-underline"
+          style={filter === "all" ? { width: "60px", opacity: 1 } : {}}
+        />
+      </div>
+      <div
+        className={`filter ${filter === "resolved" ? "filter-selected" : {}}`}
+        onClick={() => changeFilter("resolved")}
+      >
+        Resolved
+        <div
+          className="sky-blue-underline"
+          style={filter === "resolved" ? { width: "60px", opacity: 1 } : {}}
+        />
+      </div>
+      <div
+        className={`filter ${filter === "unresolved" ? "filter-selected" : {}}`}
+        onClick={() => changeFilter("unresolved")}
+      >
+        Unresolved
+        <div
+          className="sky-blue-underline"
+          style={filter === "unresolved" ? { width: "60px", opacity: 1 } : {}}
+        />
+      </div>
     </div>
   );
 };
@@ -231,14 +281,20 @@ const Wound = ({ ...props }) => {
 };
 
 const WoundImage = ({ ...props }) => {
-  const {
-    className,
-    children,
-    imageUrl,
-    createdAt,
-    updatedAt,
-    ...rest
-  } = props;
+  const { className, children, wounds, selectedWound, ...rest } = props;
+
+  let imageUrl = "",
+    createdAt = "",
+    updatedAt = "";
+  if (selectedWound && wounds) {
+    let woundIndex = wounds.findIndex(w => w.id === selectedWound);
+    if (woundIndex !== -1) {
+      imageUrl = wounds[woundIndex].attributes.imageUrl;
+      createdAt = wounds[woundIndex].attributes.createdAt;
+      updatedAt = wounds[woundIndex].attributes.updatedAt;
+    }
+  }
+
   if (imageUrl) {
     return (
       <div className={className || "wound-magnified-image-container"}>
@@ -248,14 +304,14 @@ const WoundImage = ({ ...props }) => {
         />
         <img className="wound-magnified-image" src={imageUrl} alt="wound" />
         <div className="wound-meta-data-container">
-          <p className="wound-meta-data">
-            <em>Recorded:</em>&nbsp;&nbsp;
-            {moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}
-          </p>
-          <p className="wound-meta-data">
-            <em>Last Updated:</em>&nbsp;&nbsp;
-            {moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
-          </p>
+          <div className="wound-meta-data">
+            <p>Recorded:</p>
+            <p>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</p>
+          </div>
+          <div className="wound-meta-data">
+            <p>Updated:</p>
+            <p>{moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a")}</p>
+          </div>
         </div>
       </div>
     );
