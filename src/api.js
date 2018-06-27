@@ -30,7 +30,24 @@ export default {
         .get(api_root + `patients/${patientID}/wounds`)
         .then(res => {
           const data = (res || {}).data;
-          console.log(res);
+          if (data) {
+            return data;
+          } else {
+            return [];
+          }
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+    }
+  },
+  wound: {
+    patchWound: wound => {
+      const woundID = wound.id;
+      return axios
+        .patch(api_root + `wounds/${woundID}`, wound)
+        .then(res => {
+          const data = (res || {}).data;
           if (data) {
             return data;
           } else {

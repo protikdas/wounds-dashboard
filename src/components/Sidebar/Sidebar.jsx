@@ -42,7 +42,7 @@ const Sidebar = ({ ...props }) => {
         </Link>
       </div>
       <div className="brand-container">
-        <h3>Swift</h3>
+        <h3>Wounds</h3>
         <h3>Medical</h3>
         <h3>Dashboard</h3>
       </div>

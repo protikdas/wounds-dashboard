@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./PatientDetails.less";
@@ -7,24 +8,29 @@ import "./PatientDetails.less";
 import check from "../../assets/check.svg";
 import cross from "../../assets/cross.svg";
 
-/* <----- HIGHER ORDER COMPONENT ------> */
+/* <----- HIGHER ORDER COMPONENTS ------> */
 import View from "../../HOC/View/View";
+
+/* <----- COMPONENTS ------> */
+import PatientInfo from "../PatientInfo/PatientInfo";
 
 /* <----- ACTIONS ------> */
 import { getWounds } from "../../actions/patient";
-import { selectWound } from "../../actions/wound";
+import { selectWound, patchWound } from "../../actions/wound";
 
 const mapStateToProps = (state, props) => {
-  const patients = state.patient.patients,
-    patientID = props.match.params.id,
-    patientIndex = patients.findIndex(p => p.id === parseInt(patientID, 10)),
-    patient = patients[patientIndex],
-    selectedWound = state.wound.selectedWound;
-  return {
-    patient: patient,
-    wounds: state.patient.wounds,
-    selectedWound
-  };
+  if (((state || {}).patient || {}).patients) {
+    const patients = state.patient.patients,
+      patientID = props.match.params.id,
+      patientIndex = patients.findIndex(p => p.id === parseInt(patientID, 10)),
+      patient = patients[patientIndex],
+      selectedWound = state.wound.selectedWound;
+    return {
+      patient: patient,
+      wounds: state.patient.wounds,
+      selectedWound
+    };
+  }
 };
 
 class PatientDetails extends Component {
@@ -35,18 +41,30 @@ class PatientDetails extends Component {
   }
 
   render() {
-    const { patient, wounds, selectedWound, selectWound } = this.props;
-    let woundImageUrl = "";
+    const {
+      patient,
+      wounds,
+      selectedWound,
+      selectWound,
+      patchWound
+    } = this.props;
+    let woundImageUrl = "",
+      createdAt = "",
+      updatedAt = "";
     if (selectedWound && wounds) {
       let woundIndex = wounds.findIndex(w => w.id === selectedWound);
       if (woundIndex !== -1) {
+        console.log(wounds[woundIndex].attributes.updatedAt);
         woundImageUrl = wounds[woundIndex].attributes.imageUrl;
+        createdAt = wounds[woundIndex].attributes.createdAt;
+        updatedAt = wounds[woundIndex].attributes.updatedAt;
       }
     }
     return (
-      <PatientContainer patient={patient}>
-        <Details />
+      <PatientContainer>
+        <Details patient={patient} />
         <WoundsContainer>
+          <WoundsFilter />
           <WoundList>
             {wounds &&
               wounds.map((wound, index) => {
@@ -56,11 +74,16 @@ class PatientDetails extends Component {
                     wound={wound}
                     selectedWound={selectedWound}
                     selectWound={selectWound}
+                    patchWound={patchWound}
                   />
                 );
               })}
           </WoundList>
-          <WoundImage imageUrl={woundImageUrl} />
+          <WoundImage
+            imageUrl={woundImageUrl}
+            createdAt={createdAt}
+            updatedAt={updatedAt}
+          />
         </WoundsContainer>
       </PatientContainer>
     );
@@ -71,7 +94,7 @@ PatientDetails.propTypes = {};
 
 export default connect(
   mapStateToProps,
-  { getWounds, selectWound }
+  { getWounds, selectWound, patchWound }
 )(View("patient")(PatientDetails));
 
 const PatientContainer = ({ ...props }) => {
@@ -82,12 +105,36 @@ const PatientContainer = ({ ...props }) => {
 };
 
 const Details = ({ ...props }) => {
-  const { className, children } = props;
-  return (
-    <div className={className || "details-container"}>
-      <h1>Details</h1>
-    </div>
-  );
+  const { className, patient, children } = props;
+  if ((patient || {}).attributes) {
+    const { attributes } = patient,
+      { dateOfBirth, address, updatedAt } = attributes;
+
+    return (
+      <div className={className || "details-container"}>
+        <PatientInfo patient={patient} />
+        <div className="additional-info-container">
+          <div className="additional-info">
+            <strong>Date of Birth</strong>
+            <p>{moment(dateOfBirth).format("MMMM Do YYYY")}</p>
+          </div>
+          <div className="additional-info">
+            <strong>Address</strong>
+            <p>{address}</p>
+          </div>
+        </div>
+        <LastUpdated
+          updatedAt={moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className={className || "details-container"}>
+        <div className="loading" />
+      </div>
+    );
+  }
 };
 
 const WoundsContainer = ({ ...props }) => {
@@ -100,6 +147,16 @@ const WoundList = ({ ...props }) => {
   return <div className={className || "wounds-list-container"}>{children}</div>;
 };
 
+const WoundsFilter = ({ ...props }) => {
+  const { className, children, ...rest } = props;
+  return (
+    <div className={className || "wounds-filter-container"}>
+      <p>Show Unresolved</p>&nbsp;&nbsp;&nbsp;
+      <p>Show Resolved</p>
+    </div>
+  );
+};
+
 const Wound = ({ ...props }) => {
   const {
     className,
@@ -107,6 +164,7 @@ const Wound = ({ ...props }) => {
     wound,
     selectedWound,
     selectWound,
+    patchWound,
     ...rest
   } = props;
   if (wound) {
@@ -150,7 +208,12 @@ const Wound = ({ ...props }) => {
             <span className="wound-control">
               <p>Resolved</p>
               &nbsp;
-              <div className={`wound-toggle ${resolved ? "green" : "red"}`}>
+              <div
+                className={`wound-toggle ${resolved ? "green" : "red"}`}
+                onClick={() => {
+                  patchWound("resolve", wound);
+                }}
+              >
                 <img
                   className="toggle-symbol"
                   src={resolved ? check : cross}
@@ -168,7 +231,14 @@ const Wound = ({ ...props }) => {
 };
 
 const WoundImage = ({ ...props }) => {
-  const { className, children, imageUrl, ...rest } = props;
+  const {
+    className,
+    children,
+    imageUrl,
+    createdAt,
+    updatedAt,
+    ...rest
+  } = props;
   if (imageUrl) {
     return (
       <div className={className || "wound-magnified-image-container"}>
@@ -177,6 +247,16 @@ const WoundImage = ({ ...props }) => {
           style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}}
         />
         <img className="wound-magnified-image" src={imageUrl} alt="wound" />
+        <div className="wound-meta-data-container">
+          <p className="wound-meta-data">
+            <em>Recorded:</em>&nbsp;&nbsp;
+            {moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+          </p>
+          <p className="wound-meta-data">
+            <em>Last Updated:</em>&nbsp;&nbsp;
+            {moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
+          </p>
+        </div>
       </div>
     );
   } else {
@@ -186,4 +266,16 @@ const WoundImage = ({ ...props }) => {
       </div>
     );
   }
+};
+
+const LastUpdated = ({ ...props }) => {
+  const { className, updatedAt, ...rest } = props;
+  return (
+    <div className="last-updated">
+      <p>
+        <em>Last Updated:</em>&nbsp;
+        {updatedAt}
+      </p>
+    </div>
+  );
 };

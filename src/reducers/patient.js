@@ -1,4 +1,4 @@
-import { GET_PATIENTS, GET_WOUNDS } from "../actions/types";
+import { GET_PATIENTS, GET_WOUNDS, PATCH_WOUND } from "../actions/types";
 
 const initialState = {
   patients: []
@@ -15,6 +15,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         wounds: action.payload ? action.payload : null
+      };
+    case PATCH_WOUND:
+      return {
+        ...state,
+        wounds: state.wounds.map(
+          wound => (wound.id === action.payload.id ? action.payload : wound)
+        )
       };
     default:
       return state;
