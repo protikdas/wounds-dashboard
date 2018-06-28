@@ -3,12 +3,7 @@ import axios from "axios";
 import request from "request";
 const router = express.Router();
 
-// let baseURL = "https://0.0.0.0:3000";
-// if (process.env.NODE_ENV === "production") {
-//   baseURL = "https://wounds-demo-api.herokuapp.com";
-// }
-
-let baseURL = "https://wounds-demo-api.herokuapp.com";
+let baseURL = "https://0.0.0.0:3000";
 
 router.get("/patients", (req, res) => {
   axios

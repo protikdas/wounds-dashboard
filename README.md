@@ -62,6 +62,12 @@ $ npm start
 This command will start a local development server on your computer, and the app can be accessed from a browser at:
 _http://localhost:3333_
 
+The command will also start the API server concurrently at:
+_http://0.0.0.0:3000_
+
+And the proxy express server will be started at:
+_http://localhost:5000_
+
 ### Login
 
 In order to login to the app, please use the password below:

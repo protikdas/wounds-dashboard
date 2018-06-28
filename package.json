@@ -22,10 +22,23 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "faker": "^4.1.0",
+    "hapi": "^17.5.1",
+    "hapi-pagination": "^2.0.0",
+    "hapi-qs": "^2.0.1",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
+    "joi": "^13.4.0",
+    "json-api-normalizer": "^0.4.10",
+    "jsonapi-serializer": "^3.5.6",
+    "vision": "^5.3.3"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node -- server.js",
+    "client": "PORT=3333 node scripts/customized-config start",
+    "server": "node ./node_modules/.bin/babel-node lib/index.js --watch",
+    "proxy-server": "nodemon --exec babel-node -- server.js",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run proxy-server\" \"npm run client\"",
     "build": "node scripts/customized-config build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
