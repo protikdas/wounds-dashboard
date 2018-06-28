@@ -4,7 +4,7 @@ Wounds Medical Dashboard is a demo web application that fetches and updates pati
 
 ## Live Demo
 
-Link to App: [Crypto Pulse](http://wounds-medical-dashboard.herokuapp.com)
+Link to App: [Wounds Medical Dashboard](http://wounds-medical-dashboard.herokuapp.com)
 
 _Please wait for up to 15 seconds as the free Heroku server fires up for the app._
 
@@ -27,7 +27,7 @@ $ npm -v
 
 If they are not installed, please visit for installation instructions: [Node.JS and npm Installation Instructions](https://www.npmjs.com/get-npm)
 
-#####I. From Zip File
+##### I. From Zip File
 
 If you have a zip file with the project source code, uncompress the zip file. From the command line interface of your computer, navigate to the uncompressed folder, and enter the following command:
 
@@ -84,22 +84,23 @@ A build folder will be created in the app directory once the build process is co
 
 ### API
 
-Please note that this application is only usable with a custom API running on localhost at port "http://0.0.0.0:3000";
-For the purpose of live demonstration, a version of this api is live at "https://wounds-demo-api.herokuapp.com". However, this api may be taken down at any moment.
+Please note that this application is only usable with a custom API running locally at port "http://0.0.0.0:3000".
+
+For the purpose of live demonstration, a version of this api is live at "https://wounds-demo-api.herokuapp.com". However, this api may be taken down at any time.
 
 ## Built With
 
 - React (JavaScript Library)
 
-  React was chosen as the JavaScript library to seamlessly render different views based on user interaction and changes in data in the app. It was also possible to make the app very modular and pass down properties to different child components that depend on the same data from a high level component.
+  React was chosen as the JavaScript library to seamlessly render different views based on user interaction and changes in data in the app. Using React also helped make the app very modular, and allowed the implementation of higher level components to improve code reusability.
 
 - Redux (JavaScript Library)
 
-  Redux was used to manage the application state, resulting in a centralized state (one source of truth), and it was much easier to predict state updates throughout the app.
+  Redux was used to manage the application state, resulting in a centralized state (one source of truth), and it was much easier to plan and thus predict state updates all throughout the app.
 
 - LESS (CSS Preprocessor)
 
-  LESS was used for styling the app and to declare variables to store different color hex codes and font names to be used globally throughout the app. Webbpack precompiler scripts were added to compile the LESS to broswer-readable CSS for both dev and production modes.
+  LESS was used for styling the app and to declare variables to store different color hex codes and font names to be used globally throughout the app. Webpack precompiler scripts were added to compile the LESS code to broswer-readable CSS code for both dev and production environments.
 
 ## Author
 
