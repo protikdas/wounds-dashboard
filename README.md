@@ -6,7 +6,7 @@ Wounds Medical Dashboard is a demo web application that fetches and updates pati
 
 Link to App: [Wounds Medical Dashboard](http://wounds-medical-dashboard.herokuapp.com)
 
-_Please wait for up to 15 seconds as the free Heroku server fires up for the app._
+_Please wait up to 15 seconds as the free Heroku server fires up for the app._
 
 ## Getting Started
 
