@@ -8,7 +8,7 @@ import morgan from "morgan";
 import apiRouter from "./routes";
 
 /* <-----PORT SETTINGS-----> */
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.SERVER_PORT || 5000;
 
 /* <----------EXPRESS SETTINGS----------> */
 const app = express();

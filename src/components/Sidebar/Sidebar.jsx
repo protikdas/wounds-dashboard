@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import ProfilePicturePlaceHolder from "../../assets/sidebar-avatar.svg";
 
 const mapStateToProps = state => ({
-  location: state.router.location.pathname
+  location: state.router.location.pathname,
+  fullName: state.auth.fullName,
+  profession: state.auth.profession
 });
 
 const Sidebar = ({ ...props }) => {
@@ -21,8 +23,8 @@ const Sidebar = ({ ...props }) => {
             src={ProfilePicturePlaceHolder}
             alt="avatar"
           />
-          <p className="profile-name">Alexander Fleming</p>
-          <p className="profile-position">Medical Practitioner</p>
+          <p className="profile-name">{props.fullName}</p>
+          <p className="profile-position">{props.profession}</p>
         </div>
       </div>
       <div className="sidebar-tab">

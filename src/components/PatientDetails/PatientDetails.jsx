@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import moment from "moment";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import "./PatientDetails.less";
 
 /* <----- ASSETS ------> */
@@ -64,10 +63,8 @@ class PatientDetails extends Component {
           return wounds.slice();
         case "resolved":
           return wounds.filter(wound => wound.attributes.resolved);
-          break;
         case "unresolved":
           return wounds.filter(wound => !wound.attributes.resolved);
-          break;
         default:
           return wounds.slice();
       }
@@ -124,14 +121,14 @@ export default connect(
 /* <----- FUNCTIONAL COMPONENTS ------> */
 
 const PatientContainer = ({ ...props }) => {
-  const { className, children, ...rest } = props;
+  const { className, children } = props;
   return (
     <div className={className || "patient-details-container"}>{children}</div>
   );
 };
 
 const Details = ({ ...props }) => {
-  const { className, patient, children } = props;
+  const { className, patient } = props;
   if ((patient || {}).attributes) {
     const { attributes } = patient,
       { dateOfBirth, address, updatedAt } = attributes;
@@ -164,17 +161,17 @@ const Details = ({ ...props }) => {
 };
 
 const WoundsContainer = ({ ...props }) => {
-  const { className, children, ...rest } = props;
+  const { className, children } = props;
   return <div className={className || "wounds-container"}>{children}</div>;
 };
 
 const WoundList = ({ ...props }) => {
-  const { className, children, ...rest } = props;
+  const { className, children } = props;
   return <div className={className || "wounds-list-container"}>{children}</div>;
 };
 
 const WoundsFilter = ({ ...props }) => {
-  const { className, children, filter, changeFilter, ...rest } = props;
+  const { className, filter, changeFilter } = props;
   return (
     <div className={className || "wounds-filter-container"}>
       <div
@@ -212,15 +209,7 @@ const WoundsFilter = ({ ...props }) => {
 };
 
 const Wound = ({ ...props }) => {
-  const {
-    className,
-    children,
-    wound,
-    selectedWound,
-    selectWound,
-    patchWound,
-    ...rest
-  } = props;
+  const { className, wound, selectedWound, selectWound, patchWound } = props;
   if (wound) {
     const { attributes, id } = wound;
     const {
@@ -285,7 +274,7 @@ const Wound = ({ ...props }) => {
 };
 
 const WoundImage = ({ ...props }) => {
-  const { className, children, wounds, selectedWound, ...rest } = props;
+  const { className, wounds, selectedWound } = props;
 
   let imageUrl = "",
     createdAt = "",
@@ -332,7 +321,7 @@ const WoundImage = ({ ...props }) => {
 };
 
 const LastUpdated = ({ ...props }) => {
-  const { className, updatedAt, ...rest } = props;
+  const { updatedAt } = props;
   return (
     <div className="last-updated">
       <p>

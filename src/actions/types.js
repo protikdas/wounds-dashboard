@@ -8,3 +8,7 @@ export const PATCH_WOUND = "PATCH_WOUND";
 
 //Sort patients by last name
 export const SORT_PATIENTS_BY_LAST_NAME = "SORT_PATIENTS_BY_LAST_NAME";
+
+//Authentication
+export const UPDATE_AUTH_FIELD = "UPDATE_AUTH_FIELD";
+export const LOGIN = "LOGIN";

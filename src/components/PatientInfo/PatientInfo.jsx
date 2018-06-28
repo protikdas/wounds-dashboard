@@ -45,6 +45,8 @@ const PatientInfo = ({ ...props }) => {
   );
 };
 
-PatientInfo.propTypes = {};
+PatientInfo.propTypes = {
+  patient: PropTypes.object.isRequired
+};
 
 export default PatientInfo;

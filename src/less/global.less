@@ -1,9 +1,23 @@
 @import "./exports.less";
 
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Raleway-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: medium;
+    font-weight: 500;
+    src: url('./fonts/Raleway-Medium.ttf');
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: @raleway;
     overflow: hidden;
     letter-spacing: 0.5px;
 }
@@ -11,6 +25,14 @@ body {
 h1, h2, h3, h4, p {
     margin: 0;
     padding: 0;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 500;
+}
+
+input {
+    font-family: @raleway;
 }
 
 a {
@@ -33,6 +55,14 @@ a {
         justify-content: center;
         align-items: center;
     }
+}
+
+.app-background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: #7ec0ee33;
+    z-index: -1;
 }
 
 .no-text-decoration {

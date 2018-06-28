@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import "./less/global.less";
 
 /* <----- COMPONENTS ------> */
+import Authentication from "./components/Authentication/Authentication";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MobileView from "./components/MobileView/MobileView";
+
+import Particles from "react-particles-js";
+import particlesParams from "./less/particles";
+
+const mapStateToProps = state => ({
+  authenticated: state.auth.authenticated
+});
 
 class App extends Component {
   constructor() {
@@ -31,14 +40,43 @@ class App extends Component {
   }
 
   render() {
-    const { viewWidth } = this.state;
+    const { viewWidth } = this.state,
+      { authenticated } = this.props;
     if (viewWidth >= 1024) {
       return (
         <div className="App">
+          <div className="app-background">
+            <Particles params={particlesParams} />
+          </div>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route component={() => <Redirect to="/dashboard" />} />
+            <Route
+              exact
+              path="/"
+              component={() =>
+                authenticated ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <Redirect to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/auth"
+              component={() =>
+                authenticated ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <Authentication />
+                )
+              }
+            />
+            <Route
+              path="/dashboard"
+              component={() =>
+                authenticated ? <Dashboard /> : <Redirect to="/auth" />
+              }
+            />
+            <Route component={() => <Redirect to="/" />} />
           </Switch>
         </div>
       );
@@ -48,4 +86,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  null
+)(App);
