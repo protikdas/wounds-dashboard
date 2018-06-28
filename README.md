@@ -4,7 +4,7 @@ Wounds Medical Dashboard is a demo web application that fetches and updates pati
 
 ## Live Demo
 
-Link to App: [Wounds Medical Dashboard](http://wounds-medical-dashboard.herokuapp.com)
+Link to App: [Wounds Medical Dashboard](https://wounds-medical-dashboard.herokuapp.com)
 
 _Please wait up to 15 seconds as the free Heroku server fires up for the app._
 
@@ -96,11 +96,11 @@ For the purpose of live demonstration, a version of this api is live at "https:/
 
 - Redux (JavaScript Library)
 
-  Redux was used to manage the application state, resulting in a centralized state (one source of truth), and it was much easier to plan and thus predict state updates all throughout the app.
+  Redux was used to manage the application state, resulting in a centralized state (one source of truth), and it was much easier to plan and thus predict state updates across the app.
 
 - LESS (CSS Preprocessor)
 
-  LESS was used for styling the app and to declare variables to store different color hex codes and font names to be used globally throughout the app. Webpack precompiler scripts were added to compile the LESS code to broswer-readable CSS code for both dev and production environments.
+  LESS was used for styling the app and to declare variables to store different color hex codes and font names to be used globally throughout the app. Webpack precompiler scripts were added to compile the LESS code to browser-readable CSS code for both dev and production environments.
 
 ## Author
 
