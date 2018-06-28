@@ -3,9 +3,14 @@ import axios from "axios";
 import request from "request";
 const router = express.Router();
 
+let baseURL = "http://0.0.0.0:3000";
+if (process.env.NODE_ENV === "production") {
+  baseURL = "https://wounds-demo-api.herokuapp.com";
+}
+
 router.get("/patients", (req, res) => {
   axios
-    .get("http://0.0.0.0:3000/patients")
+    .get(`${baseURL}/patients`)
     .then(response => {
       let data = ((response || {}).data || {}).data;
       if (data) {
@@ -22,7 +27,7 @@ router.get("/patients", (req, res) => {
 router.get("/patients/:id/wounds", (req, res) => {
   const patientID = req.params.id;
   axios
-    .get(`http://0.0.0.0:3000/patients/${patientID}/wounds`)
+    .get(`${baseURL}/patients/${patientID}/wounds`)
     .then(response => {
       let data = ((response || {}).data || {}).data;
       if (data) {
@@ -48,7 +53,7 @@ router.patch("/wounds/:id", (req, res) => {
   body = JSON.stringify(body);
   const options = {
     method: "PATCH",
-    url: `http://0.0.0.0:3000/wounds/${woundID}`,
+    url: `${baseURL}/wounds/${woundID}`,
     body
   };
 
