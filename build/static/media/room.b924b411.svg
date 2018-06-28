@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Room</title>
+    <desc>Created with Sketch by Protik Das.</desc>
+    <defs>
+        <filter x="-9.5%" y="-10.8%" width="118.7%" height="120.8%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-6.1%" y="-18.0%" width="112.3%" height="125.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" filter="url(#filter-1)" transform="translate(23.000000, 165.000000)" stroke="#000000" stroke-width="15">
+            <polyline id="Path-2" points="121.943319 127.916879 251.813529 61.897157 121.943319 0.487418227"></polyline>
+            <polyline id="Path-2" transform="translate(64.935105, 65.714730) scale(-1, 1) translate(-64.935105, -65.714730) " points="0 129.429461 129.870211 63.4097387 0 2"></polyline>
+        </g>
+        <path d="M151.015719,4.5 L151.015719,171.5" id="Path-5" stroke="#000000" stroke-width="15"></path>
+        <path d="M14,62.5 L14,228.003628" id="Path-5" stroke="#000000" stroke-width="15"></path>
+        <path d="M200.5,87.5 L249.5,109.5" id="Path-6" stroke="#000000" stroke-width="9"></path>
+        <path d="M199,123 L248.5,144.5" id="Path-6" stroke="#000000" stroke-width="10"></path>
+        <path d="M248.5,109.332592 L248.5,142.003826" id="Path-7" stroke="#000000" stroke-width="9"></path>
+        <path d="M201,87.4512461 L201,123.330823" id="Path-8" stroke="#000000" stroke-width="9"></path>
+        <path d="M101.49788,188.521485 L63.0488476,204.106611 L63.0488476,115.26078 C62.8301511,113.372961 63.8512078,111.976692 66.1120177,111.071975 C68.3728276,110.167257 80.1681151,106.434758 101.49788,99.874476" id="Path-10" stroke="#000000" stroke-width="9"></path>
+        <path d="M105,94.9182375 L105,184" id="Path-11" stroke="#000000" stroke-width="9"></path>
+        <ellipse id="Oval" stroke="#000000" stroke-width="5" fill="#FFFFFF" cx="76" cy="161" rx="1" ry="2"></ellipse>
+        <path d="M288.5,65.5 L155,12" id="Path-4" stroke="#000000" stroke-width="15"></path>
+        <path d="M14.5,64.5 L146.629856,11.5766309" id="Path-12" stroke="#000000" stroke-width="15"></path>
+        <path d="M285,60.5 L285,226.003628" id="Path-5" stroke="#000000" stroke-width="15"></path>
+        <path d="M63,214 L178.5,269.5" id="Path-13" stroke="#000000"></path>
+        <path d="M66.1106019,243.237484 L175.928225,187.354693" id="Path-3" stroke="#000000"></path>
+        <g id="Group-2" filter="url(#filter-2)" transform="translate(63.000000, 185.000000)" stroke="#000000" stroke-width="3">
+            <path d="M29,14 L144.5,69.5" id="Path-13"></path>
+            <path d="M0,29 L115.5,84.5" id="Path-13"></path>
+            <path d="M55,0 L170.5,55.5" id="Path-13"></path>
+            <path d="M3.11060186,58.2374842 L112.928225,2.35469315" id="Path-3"></path>
+            <path d="M32,72.8827911 L141.817623,17" id="Path-3"></path>
+            <path d="M61,85.8827911 L170.817623,30" id="Path-3"></path>
+        </g>
+    </g>
+</svg>
