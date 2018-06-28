@@ -2,12 +2,6 @@
 
 Wounds Medical Dashboard is a demo web application that fetches and updates patient and wounds information using a custom api.
 
-## Live Demo
-
-Link to App: [Wounds Medical Dashboard](https://wounds-medical-dashboard.herokuapp.com)
-
-_Please wait up to 15 seconds as the free Heroku server fires up for the app._
-
 ## Getting Started
 
 ### Installation
@@ -90,9 +84,7 @@ A build folder will be created in the app directory once the build process is co
 
 ### API
 
-Please note that this application is only usable with a custom API running locally at port "http://0.0.0.0:3000".
-
-For the purpose of live demonstration, a version of this api is live at "https://wounds-demo-api.herokuapp.com". However, this api may be taken down at any time.
+Please note that this application is only usable when the custom API is running locally at port "http://0.0.0.0:3000". To allow cross origin requests to the API server, a proxy server has been written with Express.
 
 ## Built With
 
@@ -103,6 +95,10 @@ For the purpose of live demonstration, a version of this api is live at "https:/
 - Redux (JavaScript Library)
 
   Redux was used to manage the application state, resulting in a centralized state (one source of truth), and it was much easier to plan and thus predict state updates across the app.
+
+- Express (Node.js Server Framework)
+
+  Express was used to write a server that proxies HTTP requests the web application makes to the local API server.
 
 - LESS (CSS Preprocessor)
 
