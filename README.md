@@ -1,6 +1,6 @@
 # Wounds Medical Dashboard
 
-Wounds Medical Dashboard is a demo web application that fetches and updates patient and wounds information from a custom api.
+Wounds Medical Dashboard is a demo web application that fetches and updates patient and wounds information using a custom api.
 
 ## Live Demo
 
